@@ -13,13 +13,18 @@ class PollsController extends Controller
         return response()->json(Poll::all(),200);
     }
 
+
+
     public function show($id){
         $poll = Poll::find($id);
         if (is_null($poll))
             return response()->json(null,404);
-        $response = new PollResponse(Poll::findOrFail($id));
+        // $poll = Poll::with('questions')->findOrFail($id);
+        $poll = Poll::with('questions')->findOrFail($id);
+        $response = new PollResponse($poll);
         return response()->json($response,200);
     }
+
 
     public function store(Request $request){
         $rules = [
@@ -44,5 +49,10 @@ class PollsController extends Controller
         return response()->json([
             'msg' => 'Message is required',
         ],501);
+    }
+    public function questions(Request $request, Poll $poll){
+        $questions = $poll->questions;
+        return response()->json($questions, 200);
+        
     }
 }
