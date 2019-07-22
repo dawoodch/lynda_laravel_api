@@ -13,8 +13,6 @@ class PollsController extends Controller
         return response()->json(Poll::paginate(1),200);
     }
 
-
-
     public function show($id){
         $poll = Poll::findOrFail($id);
         $response['posts'] = $poll;
