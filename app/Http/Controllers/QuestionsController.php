@@ -36,9 +36,7 @@ class QuestionsController extends Controller
      */
     public function store(Request $request)
     {
-        
-        return response()->json(Question::create($request->all()),201);
-        
+        return response()->json(Question::create($request->all()),201);   
     }
 
     /**
@@ -49,9 +47,7 @@ class QuestionsController extends Controller
      */
     public function show(Question $question)
     {
-        
-        return response()->json($question,200);
-        
+        return response()->json($question,200);   
     }
 
     /**
